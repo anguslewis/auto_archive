@@ -54,7 +54,7 @@ def create_dir_if_not_exist(path):
         os.makedirs(path)
 
 # create archive folder if it does not exist
-archive_subdir_path = os.path.join(dir_to_archive,'archive')
+archive_subdir_path = os.path.join(dir_to_archive,'archives')
 create_dir_if_not_exist(archive_subdir_path)
 
 # loop over dictionary keys, making archive folders as necessary and copying files to archive
@@ -88,14 +88,14 @@ if len(archived)!=0:
         print(file)
     print('End of list of that were archived. A total of ' + str(len(archived)) + ' files were archived.')
 else:
-    print('No files were moved to the archive subfolder.')
+    print('No files were moved to the archives subfolder.')
 
 # print files that were not archived
 if len(not_archived)!=0:
-    print('The following files already existed in the archive subfolder and were not copied:')
+    print('The following files already existed in the archives subfolder and were not copied:')
     for file in not_archived:
         print(file)
-    print('End of list of files not archived due to already existing in the correct archive subfolder.')
+    print('End of list of files not archived due to already existing in the correct archives subfolder.')
     print('A total of ' + str(len(not_archived)) + ' files were not archived.')
 else:
-    print('Every file was archived (none were skipped because they already existed in the archive subfolder).')
+    print('Every file was archived (none were skipped because they already existed in the archives subfolder).')
