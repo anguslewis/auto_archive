@@ -35,7 +35,7 @@ for file in files_path:
     # check if path is file
     if Path(file).is_file():
         # if file get month and year it was last edited
-        secs_since_epoch = os.path.getmtime(files_path[0])
+        secs_since_epoch = os.path.getmtime(file)
         date_str = datetime.datetime.fromtimestamp(secs_since_epoch).strftime('%b%Y').lower()
         # save path to list in dictionary organized by edit date
         if date_str in date_files_dict:
