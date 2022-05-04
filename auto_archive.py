@@ -53,11 +53,24 @@ def create_dir_if_not_exist(path):
     if not is_exist:
         os.makedirs(path)
 
-# create archive folder if it does not exist
-archive_subdir_path = os.path.join(dir_to_archive,'archives')
-create_dir_if_not_exist(archive_subdir_path)
+# check if current folder is latest subfolder
+base, last_level = os.path.split(dir_to_archive)
+if last_level=='':
+    base, last_level = os.path.split(base)
+if last_level=='latest':
+    latest_subfolder_exists = 1
+else:
+    latest_subfolder_exists = 0
 
-# loop over dictionary keys, making archive folders as necessary and copying files to archive
+# create archives folder if it does not exist
+if latest_subfolder_exists==0:
+    archive_subdir_path = os.path.join(dir_to_archive,'archives')
+    create_dir_if_not_exist(archive_subdir_path)
+if latest_subfolder_exists==1:
+    archive_subdir_path = os.path.join(base,'archives')
+    create_dir_if_not_exist(archive_subdir_path)
+
+# loop over dictionary keys, making archive folders as necessary and copying files to archives
 not_archived=[]
 archived=[]
 for key in date_files_dict:
