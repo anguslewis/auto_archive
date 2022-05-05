@@ -8,6 +8,7 @@ import re
 import datetime
 from pathlib import Path
 import shutil
+import copy
 
 ######################################################################
 # ARCHIVE FILES
@@ -56,7 +57,9 @@ def create_dir_if_not_exist(path):
 # check if current folder is latest subfolder
 base, last_level = os.path.split(dir_to_archive)
 if last_level=='':
-    base, last_level = os.path.split(base)
+    dir_without_trailing_slash = copy.copy(base)
+    dir_without_trailing_slash = os.path.split(dir_without_trailing_slash)
+    base, last_level = dir_without_trailing_slash
 if last_level=='latest':
     latest_subfolder_exists = 1
 else:
@@ -69,6 +72,9 @@ if latest_subfolder_exists==0:
 if latest_subfolder_exists==1:
     archive_subdir_path = os.path.join(base,'archives')
     create_dir_if_not_exist(archive_subdir_path)
+
+# output to verify archive path is correct
+print('The archives path is: ' + archive_subdir_path)
 
 # loop over dictionary keys, making archive folders as necessary and copying files to archives
 not_archived=[]
